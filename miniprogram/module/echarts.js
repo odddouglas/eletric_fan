@@ -1,5 +1,5 @@
 
-import * as echarts from "../ec-canvas/echarts";
+import * as echarts from "../utils/ec-canvas/echarts";
 
 //
 function initChart(getOptionFunc, canvas, width, height, dpr) {

@@ -1,5 +1,5 @@
 
-import * as echarts from "../../utils/ec-canvas/echarts";
+import * as echarts from "../../utils/ec-canvas/echarts.js";
 const app = getApp();
 const bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
 const echart = require('../../module/echarts.js');
@@ -9,7 +9,6 @@ Page({
   data: {
 
   },
-
 
 
   //蓝牙模块函数调用 
