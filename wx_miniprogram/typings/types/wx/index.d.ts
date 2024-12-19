@@ -50,7 +50,7 @@ declare namespace WechatMiniprogram {
         ? void
         : Promise<Parameters<Exclude<T['success'], undefined>>[0]>
 
-    //  TODO: Extract real definition from `lib.dom.d.ts` to replace this
+  
     type IIRFilterNode = any
     type WaveShaperNode = any
     type ConstantSourceNode = any
@@ -69,7 +69,6 @@ declare namespace WechatMiniprogram {
     type WebGLTexture = any
     type WebGLRenderingContext = any
 
-    // TODO: fill worklet type
     type WorkletFunction = (...args: any) => any
     type AnimationObject = any
     type SharedValue<T = any> = T

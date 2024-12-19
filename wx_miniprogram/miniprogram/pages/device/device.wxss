@@ -1,1 +1,34 @@
-/* pages/device.wxss */
+/* pages/device/device.wxss */
+
+button {
+  background-color: #007aff; /* 按钮背景颜色 */
+  color: white; /* 按钮文字颜色 */
+  border: none; /* 去掉边框 */
+  border-radius: 5px; /* 圆角边框 */
+  padding: 10px 20px; /* 内边距 */
+  font-size: 16px; /* 字体大小 */
+  text-align: center; /* 文字居中 */
+  margin: 10px 0; /* 外边距 */
+}
+
+button:active {
+  background-color: #005bb5; /* 按钮按下时的背景颜色 */
+}
+
+.devices_summary {
+  font-size: 18px; /* 字体大小 */
+  color: #333; /* 文字颜色 */
+  margin: 10px 0; /* 外边距 */
+}
+
+.device_item {
+  padding: 10px; /* 内边距 */
+  border: 1px solid #ddd; /* 边框 */
+  border-radius: 5px; /* 圆角边框 */
+  margin: 5px 0; /* 外边距 */
+  background-color: #f9f9f9; /* 背景颜色 */
+}
+
+.device_item_hover {
+  background-color: #e0e0e0; /* 悬停时的背景颜色 */
+}
