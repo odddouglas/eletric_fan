@@ -18,11 +18,9 @@ Page({
   openBluetoothAdapter() {
     bluetooth.openBluetoothAdapter(this);
   },
-
   createBLEConnection(e) {
     bluetooth.createBLEConnection(this, e);
   },
-
   closeBLEConnection() {
     bluetooth.closeBLEConnection(this);
   },
