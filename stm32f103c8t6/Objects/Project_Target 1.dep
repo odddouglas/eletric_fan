@@ -779,7 +779,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 F (.\System\Delay.h)(0x6130920E)()
-F (.\User\main.c)(0x676532EE)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\GXHT30 -I .\Hardware-ID:\keil5\ARM\Pack\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
+F (.\User\main.c)(0x67655E17)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\GXHT30 -I .\Hardware-ID:\keil5\ARM\Pack\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\main.o --omf_browse .\objects\main.crf --depend .\objects\main.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -815,7 +815,7 @@ I (.\Hardware\Key.h)(0x615AC3F0)
 I (.\Hardware\Timer3.h)(0x67602B34)
 I (.\Hardware\IC.h)(0x632C5218)
 I (.\GXHT30\GXHT30.h)(0x6606BF94)
-I (.\Hardware\Serial.h)(0x67650455)
+I (.\Hardware\Serial.h)(0x67655D22)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x599ECD2C)
 F (.\User\stm32f10x_conf.h)(0x4D99A59E)()
@@ -1065,7 +1065,7 @@ I (.\Library\stm32f10x_usart.h)(0x4D783BB4)
 I (.\Library\stm32f10x_wwdg.h)(0x4D783BB4)
 I (.\Library\misc.h)(0x4D783BB4)
 F (.\Hardware\Timer3.h)(0x67602B34)()
-F (.\Hardware\Serial.c)(0x67653346)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\GXHT30 -I .\Hardware-ID:\keil5\ARM\Pack\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
+F (.\Hardware\Serial.c)(0x67655F5F)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\GXHT30 -I .\Hardware-ID:\keil5\ARM\Pack\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\serial.o --omf_browse .\objects\serial.crf --depend .\objects\serial.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x599ECD2E)
@@ -1097,7 +1097,7 @@ I (.\Library\misc.h)(0x4D783BB4)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x599ECD2C)
 I (D:\keil5\ARM\ARMCC\include\stdarg.h)(0x599ECD2A)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x599ECD2C)
-F (.\Hardware\Serial.h)(0x67650455)()
+F (.\Hardware\Serial.h)(0x67655D22)()
 F (.\GXHT30\GXHT30.c)(0x6606BF94)(--c99 -c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I .\Start -I .\Library -I .\User -I .\System -I .\Hardware -I .\GXHT30 -I .\Hardware-ID:\keil5\ARM\Pack\Keil\STM32F1xx_DFP\2.2.0\Device\Include-D__UVISION_VERSION="539" -DSTM32F10X_MD -DUSE_STDPERIPH_DRIVER-o .\objects\gxht30.o --omf_browse .\objects\gxht30.crf --depend .\objects\gxht30.d)
 I (.\Start\stm32f10x.h)(0x4D783CB4)
 I (.\Start\core_cm3.h)(0x4D523B58)

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <string.h>
+
 char HC05_RxPacket[100]; // 定义接收数据包数组，数据包格式"@MSG\r\n"
 uint8_t Serial_RxFlag;	 // 定义接收数据包标志位
 
@@ -66,7 +67,7 @@ void Serial_SendByte(uint8_t Byte)
 	USART_SendData(USART1, Byte); // 将字节数据写入数据寄存器，写入后USART自动生成时序波形
 	while (USART_GetFlagStatus(USART1, USART_FLAG_TXE) == RESET)
 		; // 等待发送完成
-	/*下次写入数据寄存器会自动清除发送完成标志位，故此循环后，无需清除标志位*/
+		  /*下次写入数据寄存器会自动清除发送完成标志位，故此循环后，无需清除标志位*/
 }
 
 /**
@@ -153,7 +154,33 @@ void Serial_Printf(char *format, ...)
 	va_end(arg);				   // 结束变量arg
 	Serial_SendString(String);	   // 串口发送字符数组（字符串）
 }
+int Rxdata2Int(char *RxPacket)
+{
+	if (!RxPacket)
+		return -1; // 防止空指针
 
+	int length = strlen(RxPacket);
+	if (length == 0)
+		return -1; // 检查是否为空字符串
+
+	// 手动检查是否为数字并转换为整数
+	long result = 0;
+	for (int i = 0; i < length; i++)
+	{
+		char ch = RxPacket[i];
+
+		// 检查字符是否为数字
+		if (ch < '0' || ch > '9')
+		{
+			return -1; // 非数字字符
+		}
+
+		// 转换为整数
+		result = result * 10 + (ch - '0');
+	}
+
+	return (int)result;
+}
 /**
  * 函    数：USART1中断函数
  * 参    数：无
@@ -208,28 +235,3 @@ void USART1_IRQHandler(void)
 		USART_ClearITPendingBit(USART1, USART_IT_RXNE); // 清除标志位
 	}
 }
-// // TODO: 貌似是拿来显示整型的，暂时用不上
-// int displaySerialRxPacket(char *HC05_RxPacket)
-// {
-// 	int length = strlen(HC05_RxPacket);
-// 	int num;
-
-// 	if (length == 1)
-// 	{
-// 		// 如果长度是1，显示一位数的数字
-// 		num = HC05_RxPacket[0] - '0';
-// 		OLED_ShowNum(2, 1, num, 1);
-// 	}
-// 	else if (length == 2)
-// 	{
-// 		// 如果长度是2，显示两位数的数字
-// 		num = (HC05_RxPacket[0] - '0') * 10 + (HC05_RxPacket[1] - '0');
-// 		OLED_ShowNum(2, 1, num, 2);
-// 	}
-// 	else
-// 	{
-// 		// 处理长度不是1或2的情况
-// 		printf("无效的输入长度: %d\n", length);
-// 	}
-// 	return num;
-// }

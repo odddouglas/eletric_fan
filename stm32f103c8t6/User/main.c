@@ -48,49 +48,15 @@ int main(void)
 		OLED_ShowNum(1, 7, Angle, 3); // OLED显示角度变量
 		// OLED_ShowNum(2, 7, freq, 6);					// OLED显示角度变量
 		OLED_ShowNum(3, 7, freq * 30, 6);				// OLED显示角度变量
-		OLED_ShowNum(4, 7, GXHT30_Temperature * 10, 4); // OLED显示角度变量
-		while (1)
+		OLED_ShowNum(4, 7, GXHT30_Temperature * 10, 6); // OLED显示角度变量
+
+		if (Serial_RxFlag == 1) // 如果接收到数据包
 		{
-			if (Serial_RxFlag == 1) // 如果接收到数据包
-			{
 
-				OLED_ShowString(2, 1, "Rxdata:         "); // Rxdata:之后有9格用于刷新
-				OLED_ShowString(2, 8, HC05_RxPacket);	   // OLED清除指定位置，并显示接收到的数据包
-
-				// OLED_ShowNum(2, 1, displaySerialRxPacket(HC05_RxPacket), strlen(HC05_RxPacket));
-				//			/*将收到的数据包与预设的指令对比，以此决定将要执行的操作*/
-				//			if (strcmp(HC05_RxPacket, "LED_ON") == 0)			//如果收到LED_ON指令
-				//			{
-				//				LED1_ON();										//点亮LED
-				//				Serial_SendString("LED_ON_OK\r\n");				//串口回传一个字符串LED_ON_OK
-				//				OLED_ShowString(2, 1, "                ");
-				//				OLED_ShowString(2, 1, "LED_ON_OK");				//OLED清除指定位置，并显示LED_ON_OK
-				//			}
-				//			else if (strcmp(HC05_RxPacket, "LED_OFF") == 0)	//如果收到LED_OFF指令
-				//			{
-				//				LED1_OFF();										//熄灭LED
-				//				Serial_SendString("LED_OFF_OK\r\n");			//串口回传一个字符串LED_OFF_OK
-				//				OLED_ShowString(2, 1, "                ");
-				//				OLED_ShowString(2, 1, "LED_OFF_OK");			//OLED清除指定位置，并显示LED_OFF_OK
-				//			}
-				//			else						//上述所有条件均不满足，即收到了未知指令
-				//			{
-				//				Serial_SendString("ERROR_COMMAND\r\n");			//串口回传一个字符串ERROR_COMMAND
-				//				OLED_ShowString(2, 1, "                ");
-				//				OLED_ShowString(2, 1, "ERROR_COMMAND");			//OLED清除指定位置，并显示ERROR_COMMAND
-				//			}
-
-				Serial_RxFlag = 0; // 处理完成后，需要将接收数据包标志位清零，否则将无法接收后续数据包
-			}
+			OLED_ShowString(2, 1, "Rxdata:         "); // Rxdata:之后有9格用于刷新
+			// OLED_ShowString(2, 8, HC05_RxPacket);	   // OLED清除指定位置，并显示接收到的数据包
+			OLED_ShowNum(2, 8, Rxdata2Int(HC05_RxPacket), strlen(HC05_RxPacket));
+			Serial_RxFlag = 0; // 处理完成后，需要将接收数据包标志位清零，否则将无法接收后续数据包
 		}
 	}
 }
-
-// void TIM3_IRQHandler(void)
-//{
-//	if (TIM_GetITStatus(TIM3, TIM_IT_Update) == SET)
-//	{
-//		// freq=IC_GetFreq()
-//		TIM_ClearITPendingBit(TIM3, TIM_IT_Update);
-//	}
-// }
