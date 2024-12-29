@@ -1,3 +1,7 @@
+<!-- 温度计 -->
+<view class="my-chart">
+    <ec-canvas id="thermometer_ec" canvas-id="thermometer_ec" ec="{{lazyEc}}"></ec-canvas>
+</view>
 <button wx:if="{{!isConnected}}" bindtap="openBluetoothAdapter">开始扫描</button>
 <button wx:else bindtap="closeBLEConnection">断开连接 - {{name}}</button>
 <!-- 未连接 -->
@@ -9,4 +13,3 @@
         <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
     </view>
 </block>
-
