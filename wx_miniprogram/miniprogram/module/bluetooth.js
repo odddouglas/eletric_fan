@@ -78,9 +78,9 @@ function getBluetoothAdapterState(page) {
 
 // 开始搜索蓝牙设备
 function startBluetoothDevicesDiscovery(page) {
-  if (page._discoveryStarted) return;
+  // if (page._discoveryStarted) return; //加了这个就只搜一次
 
-  page._discoveryStarted = true;
+  // page._discoveryStarted = true;
   wx.startBluetoothDevicesDiscovery({
     allowDuplicatesKey: true,
     success: response => {
@@ -89,7 +89,10 @@ function startBluetoothDevicesDiscovery(page) {
     },
     fail: err => {
       console.log("搜索设备失败", err);
-      wx.showToast({ title: "搜索设备失败", icon: "error" });
+      wx.showToast({
+        title: "搜索设备失败",
+        icon: "error"
+      });
     },
   });
 }
@@ -129,16 +132,26 @@ function createBLEConnection(page, e) {
   wx.createBLEConnection({
     deviceId,
     success: () => {
-      page.setData({ isConnected: true, name, deviceId });
+      page.setData({
+        isConnected: true,
+        name,
+        deviceId
+      });
       // 定时器延时显示
       setTimeout(() => {
-        wx.showToast({ title: "连接蓝牙设备成功", icon: "success" });
+        wx.showToast({
+          title: "连接蓝牙设备成功",
+          icon: "success"
+        });
       }, 500);
       getBLEDeviceServices(page, deviceId); // 获取蓝牙服务
     },
     fail: e => {
       console.log("连接失败", e.errMsg);
-      wx.showToast({ title: "连接失败,错误信息: " + e.errMsg, icon: "error" });
+      wx.showToast({
+        title: "连接失败,错误信息: " + e.errMsg,
+        icon: "error"
+      });
     },
   });
   stopBluetoothDevicesDiscovery(); // 停止搜索设备
@@ -147,9 +160,18 @@ function createBLEConnection(page, e) {
 // 断开蓝牙连接
 function closeBLEConnection(page) {
   console.log("断开与蓝牙低功耗设备的连接");
-  wx.showToast({ title: "已断开和蓝牙设备的连接", icon: "none" });
-  wx.closeBLEConnection({ deviceId: page.data.deviceId });
-  page.setData({ isConnected: false, chs: [], canWrite: false });
+  wx.showToast({
+    title: "已断开和蓝牙设备的连接",
+    icon: "none"
+  });
+  wx.closeBLEConnection({
+    deviceId: page.data.deviceId
+  });
+  page.setData({
+    isConnected: false,
+    chs: [],
+    canWrite: false
+  });
 }
 
 // 获取蓝牙设备服务
@@ -178,10 +200,16 @@ function getBLEDeviceCharacteristics(page, deviceId, serviceId) {
       for (let i = 0; i < res.characteristics.length; i++) {
         let item = res.characteristics[i];
         if (item.properties.read) {
-          wx.readBLECharacteristicValue({ deviceId, serviceId, characteristicId: item.uuid });
+          wx.readBLECharacteristicValue({
+            deviceId,
+            serviceId,
+            characteristicId: item.uuid
+          });
         }
         if (item.properties.write) {
-          page.setData({ canWrite: true });
+          page.setData({
+            canWrite: true
+          });
           page._deviceId = deviceId;
           page._serviceId = serviceId;
           page._characteristicId = item.uuid;
@@ -209,7 +237,7 @@ function getBLEDeviceCharacteristics(page, deviceId, serviceId) {
     console.log("收到原始的数据", characteristic, characteristic.value);
     const receivedData = ab2str(characteristic.value); // 转换为字符串
     console.log("接收到的数据", receivedData);
-    parseReceivedData(page, receivedData);
+    parseReceivedData(page, receivedData); //解析数据
   });
 }
 
@@ -225,11 +253,17 @@ function writeBLECharacteristicValue(page, jsonStr) {
     value: arrayBufferValue,
     success(res) {
       console.log("消息发送成功", res.errMsg);
-      wx.showToast({ title: "消息发送成功", icon: "none" });
+      wx.showToast({
+        title: "消息发送成功",
+        icon: "none"
+      });
     },
     fail(e) {
       console.log("发送消息失败", e);
-      wx.showToast({ title: "发送消息失败,错误信息: " + e.errMsg, icon: "none" });
+      wx.showToast({
+        title: "发送消息失败,错误信息: " + e.errMsg,
+        icon: "none"
+      });
     },
   });
 }

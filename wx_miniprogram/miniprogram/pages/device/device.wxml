@@ -9,3 +9,4 @@
         <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
     </view>
 </block>
+

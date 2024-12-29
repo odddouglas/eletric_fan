@@ -3,12 +3,12 @@
         {
             "name": "Target 1",
             "includePath": [
-                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\电子测量大作业\\电子测量大作业\\Start",
-                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\电子测量大作业\\电子测量大作业\\Library",
-                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\电子测量大作业\\电子测量大作业\\User",
-                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\电子测量大作业\\电子测量大作业\\System",
-                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\电子测量大作业\\电子测量大作业\\Hardware",
-                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\电子测量大作业\\电子测量大作业\\GXHT30",
+                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\stm32f103c8t6\\Start",
+                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\stm32f103c8t6\\Library",
+                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\stm32f103c8t6\\User",
+                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\stm32f103c8t6\\System",
+                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\stm32f103c8t6\\Hardware",
+                "e:\\ODDDOUGLAS\\Documents\\project\\electric_fan\\stm32f103c8t6\\GXHT30",
                 "D:\\KEIL5\\ARM\\ARMCC\\include",
                 "D:\\KEIL5\\ARM\\ARMCC\\include\\rw"
             ],
