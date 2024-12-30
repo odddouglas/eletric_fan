@@ -22,90 +22,93 @@ function initChart(getOptionFunc, canvas, width, height, dpr) {
   var option = getOptionFunc(); // 将配置选项设置到图表实例上
 
   chart.setOption(option);
-} //温度计
-// function getOption3(data) {
-//   //根据进来的数据判断阈值颜色
-//   const color = (function (value) {
-//     if (value < 20) {
-//       return '#4F88F9'; //蓝色
-//     }
-//     if (20 < value <= 30) {
-//       return '#3DC91B'; // 绿色
-//     } else if (30 < value < 40) {
-//       return '#FF7F50'; // 珊瑚色
-//     } else {
-//       return '#FF4500'; // 橙红色
-//     }
-//   })(data);
-//   return {
-//     series: [{
-//         type: 'gauge',
-//         center: ['50%', '60%'],
-//         startAngle: 180,
-//         endAngle: 0,
-//         min: 0,
-//         max: 50,
-//         splitNumber: 10,
-//         itemStyle: {
-//           color: color
-//         },
-//         progress: {
-//           show: true,
-//           width: 30
-//         },
-//         pointer: {
-//           show: false
-//         },
-//         axisLine: {
-//           lineStyle: {
-//             width: 30
-//           }
-//         },
-//         axisTick: {
-//           distance: -45,
-//           splitNumber: 2,
-//           lineStyle: {
-//             width: 2,
-//             color: '#999'
-//           }
-//         },
-//         splitLine: {
-//           distance: -52,
-//           length: 14,
-//           lineStyle: {
-//             width: 3,
-//             color: '#999'
-//           }
-//         },
-//         axisLabel: {
-//           distance: -10,
-//           color: '#999',
-//           fontSize: 20
-//         },
-//         anchor: {
-//           show: false
-//         },
-//         title: {
-//           show: false
-//         },
-//         detail: {
-//           valueAnimation: true,
-//           width: '60%',
-//           lineHeight: 40,
-//           borderRadius: 8,
-//           offsetCenter: [0, '-15%'],
-//           fontSize: 20,
-//           fontWeight: 'bolder',
-//           formatter: '{value} °C',
-//           color: 'inherit'
-//         },
-//         data: [{
-//           value: data
-//         }]
-//       },
-//     ]
-//   };
-// }
+} //仪表
+
+
+function getOption2(data) {
+  //根据进来的数据判断阈值颜色
+  var color = function (value) {
+    if (value < 20) {
+      return '#4F88F9'; //蓝色
+    }
+
+    if (20 < value <= 30) {
+      return '#3DC91B'; // 绿色
+    } else if (30 < value < 40) {
+      return '#FF7F50'; // 珊瑚色
+    } else {
+      return '#FF4500'; // 橙红色
+    }
+  }(data);
+
+  return {
+    series: [{
+      type: 'gauge',
+      center: ['50%', '60%'],
+      startAngle: 180,
+      endAngle: 0,
+      min: 0,
+      max: 50,
+      splitNumber: 10,
+      itemStyle: {
+        color: color
+      },
+      progress: {
+        show: true,
+        width: 30
+      },
+      pointer: {
+        show: false
+      },
+      axisLine: {
+        lineStyle: {
+          width: 30
+        }
+      },
+      axisTick: {
+        distance: -45,
+        splitNumber: 2,
+        lineStyle: {
+          width: 2,
+          color: '#999'
+        }
+      },
+      splitLine: {
+        distance: -52,
+        length: 14,
+        lineStyle: {
+          width: 3,
+          color: '#999'
+        }
+      },
+      axisLabel: {
+        distance: 1,
+        color: '#999',
+        fontSize: 10
+      },
+      anchor: {
+        show: false
+      },
+      title: {
+        show: false
+      },
+      detail: {
+        valueAnimation: true,
+        width: '60%',
+        lineHeight: 40,
+        borderRadius: 8,
+        offsetCenter: [0, '-15%'],
+        fontSize: 20,
+        fontWeight: 'bolder',
+        formatter: '{value} °C',
+        color: 'inherit'
+      },
+      data: [{
+        value: data
+      }]
+    }]
+  };
+} //折线图
 
 
 function getOption1(data) {
@@ -132,7 +135,7 @@ function getOption1(data) {
 } //加载条
 
 
-function getOption2() {
+function getOption0() {
   return {
     graphic: {
       elements: [{
@@ -175,9 +178,10 @@ function getOption2() {
 
 module.exports = {
   initChart: initChart,
+  getOption0: getOption0,
+  // 加载条
   getOption1: getOption1,
-  // 温度计
-  getOption2: getOption2 // 加载条
-  //getOption3
+  // 折线图
+  getOption2: getOption2 // 仪表
 
 };

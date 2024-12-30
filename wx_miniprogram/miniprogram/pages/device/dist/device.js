@@ -11,11 +11,16 @@ Page({
         chs: [],
         isConnected: false,
         isFound: false,
-        //温度计echart
+        //仪表echart
         chart1: {},
-        thermometerData: [20, 20, 20, 20, 20, 20, 20],
+        thermometer_data: [20, 20, 20, 20, 20, 20, 20],
         thermometer_ec: {},
-        lazyEc: { lazyEnable: true }
+        lazyEc1: { lazyEnable: true },
+        //折线图echart
+        chart2: {},
+        pwm_data: 20,
+        pwm_ec: {},
+        lazyEc2: { lazyEnable: true }
     },
     //蓝牙模块函数调用 
     openBluetoothAdapter: function () {
@@ -28,22 +33,6 @@ Page({
         bluetooth.closeBLEConnection(this);
     },
     // echart模块
-    updateEchart1: function () {
-        var _this = this;
-        this.changeEcData1();
-        if (this.chart1) {
-            // 如果已初始化，则更新数据
-            var option = myechart.getOption1(this.data.thermometerData);
-            this.chart1.setOption(option);
-        }
-        else {
-            // 如果未初始化，则初始化图表
-            setTimeout(function () {
-                // 模拟数据接收，在这里更新到data里, 实质上可以在此处更新chartOption的值，这是要显示的值, 可以是串口接收, 蓝牙接收等等情形
-                _this.initEchart1(); //延时setTimeOut和定时调用setInterval会冲突好像，此时changeEcData1不运行了, 因此这里就不放在setTimeOut里面了，
-            }, 10);
-        }
-    },
     initEchart1: function () {
         var _this = this;
         // 使用 selectComponent 方法获取页面中的图表组件
@@ -55,22 +44,76 @@ Page({
                 devicePixelRatio: dpr
             });
             //新建一个图标实例chart, 并通过echarts的初始化来获得新的实例, 而lazyComponent也是一个echarts实例, lazyComponent在初始化时chart作为新的实例回调进lazyComponent中
-            var option = myechart.getOption1(_this.data.thermometerData);
+            var option = myechart.getOption1(_this.data.thermometer_data);
             _this.chart1 = chart; // 将图表实例绑定到this上，方便在其他的函数中访问
             return chart;
         });
     },
     // echart数据获取温度计数据
     changeEcData1: function () {
-        var data = this.data.thermometerData;
+        var data = this.data.thermometer_data;
         data.push((Math.random() * 10 + 20).toFixed(2));
         // 模拟请求（延迟以等待数据接收，随后进行初始化）
         if (data.length > 7) {
             data.shift();
         }
         this.setData({
-            thermometerData: data
+            thermometer_data: data
         });
+    },
+    updateEchart1: function () {
+        var _this = this;
+        this.changeEcData1(); //更新数据
+        if (this.chart1) {
+            // 如果已初始化，则更新图表
+            var option = myechart.getOption1(this.data.thermometer_data);
+            this.chart1.setOption(option);
+        }
+        else {
+            // 如果未初始化，则初始化图表
+            setTimeout(function () {
+                // 模拟数据接收，在这里更新到data里, 实质上可以在此处更新chartOption的值，这是要显示的值, 可以是串口接收, 蓝牙接收等等情形
+                _this.initEchart1(); //延时setTimeOut和定时调用setInterval会冲突好像，此时changeEcData1不运行了, 因此这里就不放在setTimeOut里面了，
+            }, 10);
+        }
+    },
+    initEchart2: function () {
+        var _this = this;
+        // 使用 selectComponent 方法获取页面中的图表组件
+        this.pwm_ec = this.selectComponent('#pwm_ec');
+        this.pwm_ec.init(function (canvas, width, height, dpr) {
+            var chart = echarts.init(canvas, null, {
+                width: width,
+                height: height,
+                devicePixelRatio: dpr
+            });
+            //新建一个图标实例chart, 并通过echarts的初始化来获得新的实例, 而lazyComponent也是一个echarts实例, lazyComponent在初始化时chart作为新的实例回调进lazyComponent中
+            var option = myechart.getOption2(_this.data.pwm_data);
+            _this.chart2 = chart; // 将图表实例绑定到this上，方便在其他的函数中访问
+            return chart;
+        });
+    },
+    // echart数据获取温度计数据
+    changeEcData2: function () {
+        this.setData({
+            pwm_data: ((Math.random() * 10 + 20).toFixed(2))
+        });
+    },
+    updateEchart2: function () {
+        var _this = this;
+        this.changeEcData2(); //更新数据
+        if (this.chart2) {
+            // 如果已初始化，则更新图表
+            var option = myechart.getOption2(this.data.pwm_data);
+            this.chart2.setOption(option);
+        }
+        else {
+            // 如果未初始化，则初始化图表
+            setTimeout(function () {
+                // 模拟数据接收，在这里更新到data里, 实质上可以在此处更新chartOption的值，这是要显示的值, 可以是串口接收, 蓝牙接收等等情形
+                _this.initEchart2(); //延时setTimeOut和定时调用setInterval会冲突好像，此时changeEcData1不运行了, 因此这里就不放在setTimeOut里面了，
+            }, 10);
+        }
     },
     //生命周期函数 - 页面加载时触发
     onLoad: function () {
@@ -78,6 +121,7 @@ Page({
     //生命周期函数 - 页面初次渲染完成时触发
     onReady: function () {
         this.updateEchart1();
+        this.updateEchart2();
     },
     //生命周期函数 - 页面显示时触发
     onShow: function () {
@@ -85,7 +129,8 @@ Page({
         // 页面显示时启动定时器
         this.timer = setInterval(function () {
             _this.updateEchart1();
-        }, 2000); // 每秒更新一次富文本，一般后台更新数据之后，下一秒就可以直接更新富文本了
+            _this.updateEchart2();
+        }, 2000);
     },
     //生命周期函数 - 页面隐藏时触发
     onHide: function () {

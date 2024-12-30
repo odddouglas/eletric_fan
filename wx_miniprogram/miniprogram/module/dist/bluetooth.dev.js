@@ -9,7 +9,12 @@ function _iterableToArrayLimit(arr, i) { if (!(Symbol.iterator in Object(arr) ||
 function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 // bluetooth.js
-var app = getApp(); //这里把所有自定义的有关蓝牙的函数都export出去了，其实后在页面里import的函数只有几个
+var app = getApp(); //// 页面所需数据
+// devices: [], // 存储找到的蓝牙设备
+// chs: [], // 存储蓝牙特征
+// isConnected: false, // 蓝牙连接状态
+// isFound: false, // 设备搜索状态
+//这里把所有自定义的有关蓝牙的函数都export出去了，其实后在页面里import的函数只有几个
 
 module.exports = {
   openBluetoothAdapter: openBluetoothAdapter,

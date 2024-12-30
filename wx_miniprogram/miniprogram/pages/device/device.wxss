@@ -54,14 +54,28 @@ button:active {
 
 
 /* 将图表设置为父容器my-chart宽高的百分百 */
+.my-chart1{
+  width: 740rpx;
+  height: 600rpx;
+  background-color: #f0f0f0;
+  /* 灰色背景 */
+  border: 1px solid #ccc;
+  /* 边框 */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* 添加轻微阴影效果 */
+}
+.my-chart2{
+  width: 740rpx;
+  height: 500rpx;
+  background-color: #f0f0f0;
+  /* 灰色背景 */
+  border: 1px solid #ccc;
+  /* 边框 */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  /* 添加轻微阴影效果 */
+}
+/* echart样式 */
 ec-canvas {
   width: 100%;
   height: 100%;
-}
-
-/* echart样式 */
-.my-chart {
-  width: 780rpx;
-  height: 600rpx;
-
 }
