@@ -1,19 +1,14 @@
 
 import * as echarts from "../../utils/ec-canvas/echarts.js";
 const app = getApp();
-const bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
 const myechart = require('../../module/myecharts.js');
 
 Page({
 
   data: {
-    // 蓝牙连接部分
-    devices: [], // 存储找到的蓝牙设备
-    chs: [], // 存储蓝牙特征
-    isConnected: false, // 蓝牙连接状态
-    isFound: false, // 设备搜索状态
-
-    //仪表echart
+    //滑动条
+    slider_value: null, //滑动值0~100，用于控制pwm
+    //仪表echart  
     chart1: {}, //该空对象用于获取内置初始完毕的echart组件
     thermometer_data: [20, 20, 20, 20, 20, 20, 20], //温度数据
     thermometer_ec: {}, //该空对象用于获取组件对象并调用初始化函数
@@ -25,16 +20,14 @@ Page({
     lazyEc2: { lazyEnable: true }, //不能使用自动初始化，得使用手动初始化，这样才能控制延��渲染
   },
 
-  //蓝牙模块函数调用 
-  openBluetoothAdapter() {
-    bluetooth.openBluetoothAdapter(this);
+
+
+  // 处理滑块值变化的函数
+  onSliderChange(e) {
+    this.data.slider_value = e.detail.value; // 获取滑块的新值
+    console.log("slider_value: ", this.data.slider_value);
   },
-  createBLEConnection(e) {
-    bluetooth.createBLEConnection(this, e);
-  },
-  closeBLEConnection() {
-    bluetooth.closeBLEConnection(this);
-  },
+
 
   // echart模块
 

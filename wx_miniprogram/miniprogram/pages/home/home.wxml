@@ -1,2 +1,32 @@
 <!-- pages/home.wxml -->
-<text>pages/home.wxml</text>
+<!-- pages/home.wxml -->
+<view class="outer-container">
+    <view class="button-container">
+        <button wx:if="{{!isConnected}}" bindtap="openBluetoothAdapter" class="custom-button">
+            点击开始扫描
+        </button>
+        <button wx:else bindtap="closeBLEConnection" class="custom-button">断开连接</button>
+    </view>
+    <view class="device-info-container">
+        <block wx:if="{{!isConnected}}">已发现 {{devices.length}} 个外围设备</block>
+        <block wx:else> 发现数据接收</block>
+    </view>
+</view>
+<!-- 未连接 -->
+<block wx:if="{{!isConnected}}">
+    <view wx:for="{{devices}}" wx:key="index" data-device-id="{{item.deviceId}}" data-name="{{item.name || item.localName}}" bindtap="createBLEConnection" class="device_item" hover-class="device_item_hover">
+        <view style="font-size: 16px; color: #333">{{item.name}}</view>
+        <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm</view>
+        <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
+    </view>
+</block>
+<!-- richtext -->
+<view class="rich-text-container" bindtap="toggleSection" data-section="data1">
+    <rich-text nodes="{{richText_data1}}"></rich-text>
+</view>
+<view class="rich-text-container" bindtap="toggleSection" data-section="data2">
+    <rich-text nodes="{{richText_data2}}"></rich-text>
+</view>
+<view class="rich-text-container" bindtap="toggleSection" data-section="data3">
+    <rich-text nodes="{{richText_data3}}"></rich-text>
+</view>

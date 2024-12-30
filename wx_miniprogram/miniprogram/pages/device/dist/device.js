@@ -2,16 +2,12 @@
 exports.__esModule = true;
 var echarts = require("../../utils/ec-canvas/echarts.js");
 var app = getApp();
-var bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
 var myechart = require('../../module/myecharts.js');
 Page({
     data: {
-        // 蓝牙连接部分
-        devices: [],
-        chs: [],
-        isConnected: false,
-        isFound: false,
-        //仪表echart
+        //滑动条
+        slider_value: null,
+        //仪表echart  
         chart1: {},
         thermometer_data: [20, 20, 20, 20, 20, 20, 20],
         thermometer_ec: {},
@@ -22,15 +18,10 @@ Page({
         pwm_ec: {},
         lazyEc2: { lazyEnable: true }
     },
-    //蓝牙模块函数调用 
-    openBluetoothAdapter: function () {
-        bluetooth.openBluetoothAdapter(this);
-    },
-    createBLEConnection: function (e) {
-        bluetooth.createBLEConnection(this, e);
-    },
-    closeBLEConnection: function () {
-        bluetooth.closeBLEConnection(this);
+    // 处理滑块值变化的函数
+    onSliderChange: function (e) {
+        this.data.slider_value = e.detail.value; // 获取滑块的新值
+        console.log("slider_value: ", this.data.slider_value);
     },
     // echart模块
     initEchart1: function () {

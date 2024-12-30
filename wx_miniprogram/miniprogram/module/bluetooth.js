@@ -249,15 +249,19 @@ function getBLEDeviceCharacteristics(page, deviceId, serviceId) {
 }
 
 // 发送数据到蓝牙设备
-function writeBLECharacteristicValue(page, jsonStr) {
-  let arrayBufferValue = str2ab(jsonStr); // 转换为 ArrayBuffer
+function writeBLECharacteristicValue(page, value) {
+  const jsonStr = JSON.stringify({
+    key: "data",
+    value: value.toString()
+  }); //打包成jsonstr
+  let arrayBufferValue = str2ab(jsonStr); // str 转换为 ArrayBuffer
   console.log("发送数据给蓝牙", "原始字符串", jsonStr, "转换arrayBuffer", arrayBufferValue);
 
   wx.writeBLECharacteristicValue({
     deviceId: page._deviceId,
     serviceId: page._serviceId,
     characteristicId: page._characteristicId,
-    value: arrayBufferValue,
+    value: arrayBufferValue, //将ab格式的数据打包通过蓝牙发送
     success(res) {
       console.log("消息发送成功", res.errMsg);
       wx.showToast({
