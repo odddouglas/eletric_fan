@@ -107,69 +107,24 @@ function initChart(getOptionFunc, canvas, width, height, dpr) {
 //   };
 // }
 
-function getOption1() {
-  // 生成随机数据
-  function randomData() {
-    now = new Date(+now + oneDay);
-    value = value + Math.random() * 21 - 10;
-    return {
-      name: now.toString(),
-      value: [
-        [now.getFullYear(), now.getMonth() + 1, now.getDate()].join('/'),
-        Math.round(value)
-      ]
-    };
-  }
+function getOption1(data) {
 
-  let data = [];
-  let now = new Date(1997, 9, 3);
-  let oneDay = 24 * 3600 * 1000;
-  let value = Math.random() * 1000;
-  for (var i = 0; i < 1000; i++) {
-    data.push(randomData());
-  }
 
   return {
-    title: {
-      text: 'Dynamic Data & Time Axis'
-    },
-    tooltip: {
-      trigger: 'axis',
-      formatter: function (params) {
-        params = params[0];
-        var date = new Date(params.name);
-        return (
-          date.getDate() +
-          '/' +
-          (date.getMonth() + 1) +
-          '/' +
-          date.getFullYear() +
-          ' : ' +
-          params.value[1]
-        );
-      },
-      axisPointer: {
-        animation: false
-      }
-    },
     xAxis: {
-      type: 'time',
-      splitLine: {
-        show: false
-      }
+      type: 'category',
+      data: ['', '', '', '', '', '', '↑'],
+      splitLine:true
     },
     yAxis: {
       type: 'value',
-      boundaryGap: [0, '100%'],
-      splitLine: {
-        show: false
-      }
+      min: 20, // y轴最小值
+      max: 100, // y轴最大值
+      interval: 5 // 刻度间隔为1
     },
     series: [{
-      name: 'Fake Data',
+      data: data,
       type: 'line',
-      showSymbol: false,
-      data: data
     }]
   };
 }

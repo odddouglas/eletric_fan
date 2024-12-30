@@ -15,7 +15,7 @@ Page({
 
     //温度计echart
     chart1: {}, //该空对象用于获取内置初始完毕的echart组件
-    thermometerData: null, //温度数据
+    thermometerData: [20, 20, 20, 20, 20, 20, 20], //温度数据
     thermometer_ec: {}, //该空对象用于获取组件对象并调用初始化函数
     lazyEc: { lazyEnable: true }, //不能使用自动初始化，得使用手动初始化，这样才能控制延迟渲染
   },
@@ -66,10 +66,14 @@ Page({
   },
   // echart数据获取温度计数据
   changeEcData1() {
+    let data = this.data.thermometerData;
+    data.push((Math.random() * 10+20).toFixed(2));
     // 模拟请求（延迟以等待数据接收，随后进行初始化）
+    if (data.length > 7) {
+      data.shift();
+    }
     this.setData({
-      thermometerData: (Math.random() * 1.5 + 26).toFixed(2), // 生成26左右的随机数并保留两位小数
-
+      thermometerData: data,
     });
   },
 

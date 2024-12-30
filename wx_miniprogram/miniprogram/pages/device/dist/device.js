@@ -13,7 +13,7 @@ Page({
         isFound: false,
         //温度计echart
         chart1: {},
-        thermometerData: null,
+        thermometerData: [20, 20, 20, 20, 20, 20, 20],
         thermometer_ec: {},
         lazyEc: { lazyEnable: true }
     },
@@ -62,9 +62,14 @@ Page({
     },
     // echart数据获取温度计数据
     changeEcData1: function () {
+        var data = this.data.thermometerData;
+        data.push((Math.random() * 10 + 20).toFixed(2));
         // 模拟请求（延迟以等待数据接收，随后进行初始化）
+        if (data.length > 7) {
+            data.shift();
+        }
         this.setData({
-            thermometerData: (Math.random() * 1.5 + 26).toFixed(2)
+            thermometerData: data
         });
     },
     //生命周期函数 - 页面加载时触发

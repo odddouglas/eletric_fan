@@ -61,7 +61,7 @@ ec-canvas {
 
 /* echart样式 */
 .my-chart {
-  width: 700rpx;
-  height: 500rpx;
+  width: 780rpx;
+  height: 600rpx;
 
 }
