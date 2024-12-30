@@ -1,7 +1,8 @@
 // app.ts
 App({
     globalData: {
-        data1: '1',
-        data2: '2'
+        data1: null,
+        data2: null,
+        data3: null
     }
 });

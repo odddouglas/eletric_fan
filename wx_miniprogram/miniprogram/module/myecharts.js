@@ -116,9 +116,9 @@ function getOption1(data) {
     },
     yAxis: {
       type: 'value',
-      min: 20, // y轴最小值
-      max: 100, // y轴最大值
-      interval: 5 // 刻度间隔为1
+      min: 4000, // y轴最小值
+      max: 0, // y轴最大值
+      interval: 400 // 刻度间隔为1
     },
     series: [{
       data: data,

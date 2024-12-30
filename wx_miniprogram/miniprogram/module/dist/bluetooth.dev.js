@@ -256,14 +256,14 @@ function getBLEDeviceCharacteristics(page, deviceId, serviceId) {
     var receivedData = ab2str(characteristic.value); // 转换为字符串
 
     console.log("接收到的数据", receivedData);
-    parseReceivedData(page, receivedData); //解析数据
+    parseReceivedData(receivedData); //解析数据
   });
 } // 发送数据到蓝牙设备
 
 
 function writeBLECharacteristicValue(page, value) {
   var jsonStr = JSON.stringify({
-    key: "data",
+    key: "data1",
     value: value.toString()
   }); //打包成jsonstr
 
@@ -323,14 +323,6 @@ function parseReceivedData(data) {
 
       case 'data3':
         app.globalData.data3 = value;
-        break;
-
-      case 'data4':
-        app.globalData.data4 = value;
-        break;
-
-      case 'data5':
-        app.globalData.data5 = value;
         break;
 
       default:

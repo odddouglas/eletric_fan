@@ -7,7 +7,9 @@
     </view>
     <view class="device-info-container">
         <block wx:if="{{!isConnected}}">已发现 {{devices.length}} 个外围设备</block>
-        <block wx:else>发现数据接收</block>
+        <block wx:else>
+            <button bindtap="onAUTOButton" class="custom-button">【AUTO】</button>
+        </block>
     </view>
 </view>
 <!-- 未连接 -->
@@ -22,13 +24,13 @@
 </block>
 <block wx:else>
     <!-- 温度计 -->
-    <view class="my-chart1">
-        <ec-canvas id="thermometer_ec" canvas-id="thermometer_ec" ec="{{lazyEc2}}"></ec-canvas>
+    <view class="my-chart2">
+        <ec-canvas id="rpm_ec" canvas-id="rpm_ec" ec="{{lazyEc2}}"></ec-canvas>
     </view>
     <view>
         <slider min="0" max="100" step="1" value="{{value}}" show-value bindchange="onSliderChange" />
     </view>
-    <view class="my-chart2">
-        <ec-canvas id="pwm_ec" canvas-id="pwm_ec" ec="{{lazyEc1}}"></ec-canvas>
+    <view class="my-chart1">
+        <ec-canvas id="thermometer_ec" canvas-id="thermometer_ec" ec="{{lazyEc1}}"></ec-canvas>
     </view>
 </block>
