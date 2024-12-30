@@ -286,8 +286,8 @@ function closeBluetoothAdapter() {
 }
 
 
-// 解析通过蓝牙接收到的数据
-function parseReceivedData(page, data) {
+// 解析通过蓝牙接收到的数据 格式为 datax:MSG\n
+function parseReceivedData(data) {
   // 将接收到的数据按照换行符分割为多行
   const lines = data.split('\n');
 

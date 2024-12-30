@@ -1,16 +1,12 @@
 // pages/home.ts
-const bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    //蓝牙连接部分
-    devices: [], // 存储找到的蓝牙设备
-    chs: [], // 存储蓝牙特征
-    isConnected: false, // 蓝牙连接状态
-    isFound: false, // 设备搜索状态 
+
     //富文本
     richText_data1: [{
       name: 'div',
@@ -24,8 +20,8 @@ Page({
       name: 'div',
       attrs: { class: 'big-text' },
       children: [
-        { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-        { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+        { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: '' }] },
+        { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] },
         { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] }
       ]
     }],
@@ -33,32 +29,23 @@ Page({
       name: 'div',
       attrs: { class: 'big-text' },
       children: [
-        { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-        { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+        { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: '' }] },
+        { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] },
         { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] }
       ]
     }],
   },
-  //蓝牙模块函数调用 
-  openBluetoothAdapter() {
-    bluetooth.openBluetoothAdapter(this);
-  },
-  createBLEConnection(e) {
-    bluetooth.createBLEConnection(this, e);
-  },
-  closeBLEConnection() {
-    bluetooth.closeBLEConnection(this);
-  },
+
   updateRichText() {
-    // const data3 = app.globalData.data3 || 'NULL';
-    // const data4 = app.globalData.data4 || 'NULL';
+    const data1 = app.globalData.data1 || 'NULL'; //更新全局数据到本页面
+    const data2 = app.globalData.data2 || 'NULL';
     this.setData({
       richText_data1: [{
         name: 'div',
         attrs: { class: 'big-text' },
         children: [
           { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-          { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+          { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: data1 }] },
           { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] }
         ]
       }],
@@ -67,7 +54,7 @@ Page({
         attrs: { class: 'big-text' },
         children: [
           { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-          { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+          { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: data2 }] },
           { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] }
         ]
       }],
@@ -85,7 +72,9 @@ Page({
   },
 
   onLoad() {
-    // 更新富文本内容
-    this.updateRichText();
+    this.timer = setInterval(() => {
+      this.updateRichText();
+
+    }, 2000); // 每秒更新一次富文本，一般后台更新数据之后，下一秒就可以直接更新富文本了
   },
 })

@@ -297,10 +297,10 @@ function writeBLECharacteristicValue(page, value) {
 function closeBluetoothAdapter() {
   console.log("关闭蓝牙模块");
   wx.closeBluetoothAdapter();
-} // 解析通过蓝牙接收到的数据
+} // 解析通过蓝牙接收到的数据 格式为 datax:MSG\n
 
 
-function parseReceivedData(page, data) {
+function parseReceivedData(data) {
   // 将接收到的数据按照换行符分割为多行
   var lines = data.split('\n'); // 遍历每一行，解析并更新相应的数据字段
 

@@ -1,10 +1,34 @@
-<!-- 温度计 -->
-<view class="my-chart1">
-    <ec-canvas id="thermometer_ec" canvas-id="thermometer_ec" ec="{{lazyEc2}}"></ec-canvas>
+<view class="outer-container">
+    <view class="button-container">
+        <button wx:if="{{!isConnected}}" bindtap="openBluetoothAdapter" class="custom-button">
+            点击开始扫描
+        </button>
+        <button wx:else bindtap="closeBLEConnection" class="custom-button">断开连接</button>
+    </view>
+    <view class="device-info-container">
+        <block wx:if="{{!isConnected}}">已发现 {{devices.length}} 个外围设备</block>
+        <block wx:else>发现数据接收</block>
+    </view>
 </view>
-<view>
-    <slider min="0" max="100" step="1" value="{{value}}" show-value bindchange="onSliderChange" />
-</view>
-<view class="my-chart2">
-    <ec-canvas id="pwm_ec" canvas-id="pwm_ec" ec="{{lazyEc1}}"></ec-canvas>
-</view>
+<!-- 未连接 -->
+<block wx:if="{{!isConnected}}">
+    <view wx:for="{{devices}}" wx:key="index" data-device-id="{{item.deviceId}}" data-name="{{item.name || item.localName}}" bindtap="createBLEConnection" class="device_item" hover-class="device_item_hover">
+        <view style="font-size: 16px; color: #333">{{item.name}}</view>
+        <view style="font-size: 10px">信号强度: {{item.RSSI}}dBm</view>
+        <view style="font-size: 10px">UUID: {{item.deviceId}}</view>
+    </view>
+    <!-- 空白容器，带灰色背景 -->
+    <view class="empty-container"></view>
+</block>
+<block wx:else>
+    <!-- 温度计 -->
+    <view class="my-chart1">
+        <ec-canvas id="thermometer_ec" canvas-id="thermometer_ec" ec="{{lazyEc2}}"></ec-canvas>
+    </view>
+    <view>
+        <slider min="0" max="100" step="1" value="{{value}}" show-value bindchange="onSliderChange" />
+    </view>
+    <view class="my-chart2">
+        <ec-canvas id="pwm_ec" canvas-id="pwm_ec" ec="{{lazyEc1}}"></ec-canvas>
+    </view>
+</block>

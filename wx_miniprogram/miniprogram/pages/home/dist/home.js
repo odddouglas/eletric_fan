@@ -1,15 +1,9 @@
 // pages/home.ts
-var bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
 Page({
     /**
      * 页面的初始数据
      */
     data: {
-        //蓝牙连接部分
-        devices: [],
-        chs: [],
-        isConnected: false,
-        isFound: false,
         //富文本
         richText_data1: [{
                 name: 'div',
@@ -23,8 +17,8 @@ Page({
                 name: 'div',
                 attrs: { "class": 'big-text' },
                 children: [
-                    { name: 'span', attrs: { "class": 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-                    { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+                    { name: 'span', attrs: { "class": 'param-name' }, children: [{ type: 'text', text: '' }] },
+                    { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: '' }] },
                     { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: '' }] }
                 ]
             }],
@@ -32,32 +26,22 @@ Page({
                 name: 'div',
                 attrs: { "class": 'big-text' },
                 children: [
-                    { name: 'span', attrs: { "class": 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-                    { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+                    { name: 'span', attrs: { "class": 'param-name' }, children: [{ type: 'text', text: '' }] },
+                    { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: '' }] },
                     { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: '' }] }
                 ]
             }]
     },
-    //蓝牙模块函数调用 
-    openBluetoothAdapter: function () {
-        bluetooth.openBluetoothAdapter(this);
-    },
-    createBLEConnection: function (e) {
-        bluetooth.createBLEConnection(this, e);
-    },
-    closeBLEConnection: function () {
-        bluetooth.closeBLEConnection(this);
-    },
     updateRichText: function () {
-        // const data3 = app.globalData.data3 || 'NULL';
-        // const data4 = app.globalData.data4 || 'NULL';
+        var data1 = app.globalData.data1 || 'NULL'; //更新全局数据到本页面
+        var data2 = app.globalData.data2 || 'NULL';
         this.setData({
             richText_data1: [{
                     name: 'div',
                     attrs: { "class": 'big-text' },
                     children: [
                         { name: 'span', attrs: { "class": 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-                        { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+                        { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: data1 }] },
                         { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: '' }] }
                     ]
                 }],
@@ -66,7 +50,7 @@ Page({
                     attrs: { "class": 'big-text' },
                     children: [
                         { name: 'span', attrs: { "class": 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
-                        { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: 'data' }] },
+                        { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: data2 }] },
                         { name: 'span', attrs: { "class": 'param-value' }, children: [{ type: 'text', text: '' }] }
                     ]
                 }],
@@ -82,7 +66,9 @@ Page({
         });
     },
     onLoad: function () {
-        // 更新富文本内容
-        this.updateRichText();
+        var _this = this;
+        this.timer = setInterval(function () {
+            _this.updateRichText();
+        }, 2000); // 每秒更新一次富文本，一般后台更新数据之后，下一秒就可以直接更新富文本了
     }
 });

@@ -12,13 +12,13 @@
     "list": [
       {
         "pagePath": "pages/home/home",
-        "text": "主页",
+        "text": "",
         "iconPath": "/icon/home-icon.png",
         "selectedIconPath": "/icon/home-icon-1.png"
       },
       {
         "pagePath": "pages/device/device",
-        "text": "设备",
+        "text": "",
         "iconPath": "/icon/device-icon.png",
         "selectedIconPath": "/icon/device-icon-1.png"
       }

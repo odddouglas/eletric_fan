@@ -3,10 +3,16 @@ exports.__esModule = true;
 var echarts = require("../../utils/ec-canvas/echarts.js");
 var app = getApp();
 var myechart = require('../../module/myecharts.js');
+var bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
 Page({
     data: {
         //滑动条
         slider_value: null,
+        //蓝牙连接部分
+        devices: [],
+        chs: [],
+        isConnected: false,
+        isFound: false,
         //仪表echart  
         chart1: {},
         thermometer_data: [20, 20, 20, 20, 20, 20, 20],
@@ -22,6 +28,16 @@ Page({
     onSliderChange: function (e) {
         this.data.slider_value = e.detail.value; // 获取滑块的新值
         console.log("slider_value: ", this.data.slider_value);
+    },
+    //蓝牙模块函数调用 
+    openBluetoothAdapter: function () {
+        bluetooth.openBluetoothAdapter(this);
+    },
+    createBLEConnection: function (e) {
+        bluetooth.createBLEConnection(this, e);
+    },
+    closeBLEConnection: function () {
+        bluetooth.closeBLEConnection(this);
     },
     // echart模块
     initEchart1: function () {
@@ -108,24 +124,14 @@ Page({
     },
     //生命周期函数 - 页面加载时触发
     onLoad: function () {
-    },
-    //生命周期函数 - 页面初次渲染完成时触发
-    onReady: function () {
-        this.updateEchart1();
-        this.updateEchart2();
-    },
-    //生命周期函数 - 页面显示时触发
-    onShow: function () {
         var _this = this;
-        // 页面显示时启动定时器
         this.timer = setInterval(function () {
-            _this.updateEchart1();
-            _this.updateEchart2();
-        }, 2000);
-    },
-    //生命周期函数 - 页面隐藏时触发
-    onHide: function () {
-        clearInterval(this.timer);
+            if (_this.data.isConnected) {
+                //连接上之后再进行更新，这样不会出现图表未渲染就进行初始化的init错误
+                _this.updateEchart1();
+                _this.updateEchart2();
+            }
+        }, 1000);
     },
     //生命周期函数 - 页面卸载时触发
     onUnload: function () {

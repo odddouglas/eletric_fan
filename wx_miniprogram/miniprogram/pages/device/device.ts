@@ -2,12 +2,17 @@
 import * as echarts from "../../utils/ec-canvas/echarts.js";
 const app = getApp();
 const myechart = require('../../module/myecharts.js');
-
+const bluetooth = require('../../module/bluetooth.js'); // Import the new Bluetooth module
 Page({
 
   data: {
     //滑动条
     slider_value: null, //滑动值0~100，用于控制pwm
+    //蓝牙连接部分
+    devices: [], // 存储找到的蓝牙设备
+    chs: [], // 存储蓝牙特征
+    isConnected: false, // 蓝牙连接状态
+    isFound: false, // 设备搜索状态 
     //仪表echart  
     chart1: {}, //该空对象用于获取内置初始完毕的echart组件
     thermometer_data: [20, 20, 20, 20, 20, 20, 20], //温度数据
@@ -28,10 +33,19 @@ Page({
     console.log("slider_value: ", this.data.slider_value);
   },
 
+  //蓝牙模块函数调用 
+  openBluetoothAdapter() {
+    bluetooth.openBluetoothAdapter(this);
+  },
 
+  createBLEConnection(e) {
+    bluetooth.createBLEConnection(this, e);
+  },
+
+  closeBLEConnection() {
+    bluetooth.closeBLEConnection(this);
+  },
   // echart模块
-
-
   initEchart1() {
     // 使用 selectComponent 方法获取页面中的图表组件
     this.thermometer_ec = this.selectComponent('#thermometer_ec');
@@ -116,27 +130,13 @@ Page({
 
   //生命周期函数 - 页面加载时触发
   onLoad() {
-
-  },
-
-  //生命周期函数 - 页面初次渲染完成时触发
-  onReady() {
-    this.updateEchart1();
-    this.updateEchart2();
-  },
-
-  //生命周期函数 - 页面显示时触发
-  onShow() {
-    // 页面显示时启动定时器
     this.timer = setInterval(() => {
-      this.updateEchart1();
-      this.updateEchart2();
-    }, 2000);
-  },
-
-  //生命周期函数 - 页面隐藏时触发
-  onHide() {
-    clearInterval(this.timer);
+      if (this.data.isConnected) {
+        //连接上之后再进行更新，这样不会出现图表未渲染就进行初始化的init错误
+        this.updateEchart1();
+        this.updateEchart2();
+      }
+    }, 1000);
   },
 
   //生命周期函数 - 页面卸载时触发
