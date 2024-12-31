@@ -134,9 +134,7 @@ Page({
         // app.globalData.data1 = this.data.slider_value; 
         console.log("isAuto: ", this.data.isAuto);
         this.sendBLEData("AUTO"); //发送给小程序
-    }
-    //生命周期函数 - 页面加载时触发
-    ,
+    },
     //生命周期函数 - 页面加载时触发
     onLoad: function () {
         var _this = this;

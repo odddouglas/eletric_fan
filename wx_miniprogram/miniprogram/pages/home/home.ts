@@ -34,7 +34,7 @@ Page({
 
   updateRichText() {
     const data1 = app.globalData.data1 || 'NULL'; //更新全局数据到本页面
-    const data2 = (parseInt(app.globalData.data2) / 10).toString() || 'NULL';
+    const data2 = (parseInt(app.globalData.data2) / 10).toString() || 'NULL'; //首先将三位数的字符串转换成整型，随后除以10变成浮点型之后再转字符串
     const data3 = app.globalData.data3 || 'NULL';
 
     this.setData({
@@ -42,7 +42,7 @@ Page({
         name: 'div',
         attrs: { class: 'big-text' },
         children: [
-          { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: 'data: ' }] },
+          { name: 'span', attrs: { class: 'param-name' }, children: [{ type: 'text', text: 'PWM占空比: ' }] },
           { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: data1 }] },
           { name: 'span', attrs: { class: 'param-value' }, children: [{ type: 'text', text: '' }] }
         ]
